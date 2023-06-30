@@ -6,9 +6,11 @@ function RegisterPage() {
 	const [name, setName] = useState('');
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
-	function registerUser(event) {
-		event.preventDefaut();
-		axios.get('http://localhost:4000/test');
+	function registerUser(e) {
+		e.preventDefault();
+		fetch('http://localhost:4000/test')
+			.then((response) => response.json())
+			.then((data) => console.log('it works'));
 	}
 
 	return (
