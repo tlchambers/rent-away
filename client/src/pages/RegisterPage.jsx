@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 
 function RegisterPage() {
 	const [name, setName] = useState('');
@@ -8,9 +7,21 @@ function RegisterPage() {
 	const [password, setPassword] = useState('');
 	function registerUser(e) {
 		e.preventDefault();
-		fetch('http://localhost:4000/test')
+		fetch('http://localhost:4000/register', {
+			method: 'POST',
+			headers: {
+				'Content-type': 'application/json',
+			},
+			body: JSON.stringify({
+				name: name,
+				email: email,
+				password: password,
+			}),
+		})
 			.then((response) => response.json())
-			.then((data) => console.log('it works'));
+			.then((data) => {
+				console.log('------1------', data);
+			});
 	}
 
 	return (
