@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 function RegisterPage() {
-	const [name, setName] = useState('');
+	const [first, setFirst] = useState('');
+	const [last, setLast] = useState('');
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	function registerUser(e) {
@@ -13,7 +14,8 @@ function RegisterPage() {
 				'Content-type': 'application/json',
 			},
 			body: JSON.stringify({
-				name: name,
+				first: first,
+				last: last,
 				email: email,
 				password: password,
 			}),
@@ -31,9 +33,15 @@ function RegisterPage() {
 				<form className="max-w-md mx-auto" onSubmit={registerUser}>
 					<input
 						type="text"
-						placeholder="John Smith"
-						value={name}
+						placeholder="First Name"
+						value={first}
 						onChange={(event) => setName(event.target.value)}
+					/>
+					<input
+						type="text"
+						placeholder="Last Name"
+						value={last}
+						onChange={(event) => setLast(event.target.value)}
 					/>
 					<input
 						type="email"
@@ -44,7 +52,7 @@ function RegisterPage() {
 					<input
 						type="password"
 						placeholder="password"
-						value={password}
+						value={Password}
 						onChange={(event) => setPassword(event.target.value)}
 					/>
 					<button className="custom">Register</button>
