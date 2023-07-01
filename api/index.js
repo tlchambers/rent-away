@@ -19,6 +19,11 @@ app.get('/register', (req, res) => {
 	res.json({ name, email, password });
 });
 
+app.post('/register', (req, res) => {
+	const { name, email, password } = req.body;
+	res.json({ name, email, password });
+});
+
 app.listen(4000, () =>
 	console.log(`RENT AWAY currently app listening on port ${4000}!`)
 );
