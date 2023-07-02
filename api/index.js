@@ -39,7 +39,8 @@ app.post('/register', async (req, res) => {
 		res.json({ newUser });
 	} catch (err) {
 		console.error(err.message);
-		res.json({ statusCode: 500, error: err.message });
+		res.status;
+		(422).json(err);
 	}
 });
 
