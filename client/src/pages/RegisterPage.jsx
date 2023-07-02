@@ -6,9 +6,10 @@ function RegisterPage() {
 	const [last, setLast] = useState('');
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
-	function registerUser(e) {
+
+	async function registerUser(e) {
 		e.preventDefault();
-		fetch('http://localhost:4000/register', {
+		const response = await fetch('http://localhost:4000/register', {
 			method: 'POST',
 			headers: {
 				'Content-type': 'application/json',
@@ -19,11 +20,9 @@ function RegisterPage() {
 				email: email,
 				password: password,
 			}),
-		})
-			.then((response) => response.json())
-			.then((data) => {
-				console.log('------1------', data);
-			});
+		});
+		const jsonData = await response.json();
+		console.log('New user successfully created', jsonData);
 	}
 
 	return (
@@ -35,7 +34,7 @@ function RegisterPage() {
 						type="text"
 						placeholder="First Name"
 						value={first}
-						onChange={(event) => setName(event.target.value)}
+						onChange={(event) => setFirst(event.target.value)}
 					/>
 					<input
 						type="text"
@@ -52,7 +51,7 @@ function RegisterPage() {
 					<input
 						type="password"
 						placeholder="password"
-						value={Password}
+						value={password}
 						onChange={(event) => setPassword(event.target.value)}
 					/>
 					<button className="custom">Register</button>
