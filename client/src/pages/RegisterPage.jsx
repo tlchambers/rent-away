@@ -9,20 +9,25 @@ function RegisterPage() {
 
 	async function registerUser(e) {
 		e.preventDefault();
-		const response = await fetch('http://localhost:4000/register', {
-			method: 'POST',
-			headers: {
-				'Content-type': 'application/json',
-			},
-			body: JSON.stringify({
-				first: first,
-				last: last,
-				email: email,
-				password: password,
-			}),
-		});
-		const jsonData = await response.json();
-		console.log('New user successfully created', jsonData);
+		try {
+			const response = await fetch('http://localhost:4000/register', {
+				method: 'POST',
+				headers: {
+					'Content-type': 'application/json',
+				},
+				body: JSON.stringify({
+					first: first,
+					last: last,
+					email: email,
+					password: password,
+				}),
+			});
+			const jsonData = await response.json();
+			console.log('New user successfully created', jsonData);
+			alert('Registeration successfull. Now you can login');
+		} catch (err) {
+			alert('Registeration failed. Please try again later');
+		}
 	}
 
 	return (
