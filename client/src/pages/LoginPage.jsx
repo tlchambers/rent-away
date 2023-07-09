@@ -19,7 +19,6 @@ function LoginPage() {
 				}),
 			});
 			const login = await response.json();
-			// console.log('Login sucessful', login);
 			alert('Login Sucessful');
 		} catch (error) {
 			console.log(error.message);
