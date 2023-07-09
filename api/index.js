@@ -3,10 +3,12 @@ const cors = require('cors');
 const { default: mongoose } = require('mongoose');
 require('dotenv').config();
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 const app = express();
 const User = require('./models/User.js');
 
-const bcryptSalt = bcrypt.genSaltSync(8);
+const bcryptSalt = bcrypt.genSaltSync(20);
+const jwtSecret = 'sdsgskbfsfkafgakdf';
 
 app.use(express.json());
 app.use(
@@ -41,6 +43,30 @@ app.post('/register', async (req, res) => {
 		console.error(err.message);
 		res.status;
 		(422).json(err);
+	}
+});
+
+app.post('/login', async (req, res) => {
+	const { email, password } = req.body;
+	try {
+		const checkUser = await User.findOne({ email });
+		if (checkUser) {
+			const passwordCorrect = bcrypt.compareSync(password, checkUser.password);
+			if (passwordCorrect) {
+				jwt.sign(
+					{ email: checkUser.email, id: checkUser._id },
+					jwtSecret,
+					{},
+					(error, token) => {
+						if (error) throw error;
+						res.cookie('token', token).json('Login successful');
+					}
+				);
+			}
+		}
+	} catch (error) {
+		console.log(error.message);
+		res.status(422).json('Login unsuccessful');
 	}
 });
 
