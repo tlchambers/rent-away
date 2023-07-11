@@ -4,25 +4,35 @@ import { Link } from 'react-router-dom';
 function LoginPage() {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
+	const [redirect, setRedirect] = useState(false);
 
 	async function fetchLogin(e) {
 		e.preventDefault();
 		try {
-			const response = await fetch('http://localhost:4000/login', {
-				method: 'POST',
-				headers: {
-					'Content-type': 'application/json',
+			const response = await fetch(
+				'http://localhost:4000/login',
+				{
+					method: 'POST',
+					headers: {
+						'Content-type': 'application/json',
+					},
+					body: JSON.stringify({
+						email: email,
+						password: password,
+					}),
 				},
-				body: JSON.stringify({
-					email: email,
-					password: password,
-				}),
-			});
+				{ withCredentials: true }
+			);
 			const login = await response.json();
 			alert('Login Sucessful');
+			setRedirect(true);
 		} catch (error) {
 			console.log(error.message);
 		}
+	}
+
+	if (redirect) {
+		return <Navigate to={'/'} />;
 	}
 
 	return (
