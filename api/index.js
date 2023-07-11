@@ -59,7 +59,7 @@ app.post('/login', async (req, res) => {
 					{},
 					(error, token) => {
 						if (error) throw error;
-						res.cookie('token', token).json('Login successful');
+						res.cookie('token', token).json(checkUser);
 					}
 				);
 			}
