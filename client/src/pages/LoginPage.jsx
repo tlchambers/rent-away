@@ -24,8 +24,8 @@ function LoginPage() {
 				},
 				{ withCredentials: true }
 			);
-			const userInfo = await response.json();
-			setUSer(userInfo);
+			const data = await response.json();
+			setUSer(data);
 			alert('Login Sucessful');
 			setRedirect(true);
 		} catch (error) {
