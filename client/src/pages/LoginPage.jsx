@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { UserContext } from '../UserContext';
 
 function LoginPage() {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [redirect, setRedirect] = useState(false);
-
+	const { setUSer } = useContext(UserContext);
 	async function fetchLogin(e) {
 		e.preventDefault();
 		try {
@@ -23,7 +24,8 @@ function LoginPage() {
 				},
 				{ withCredentials: true }
 			);
-			const login = await response.json();
+			const userInfo = await response.json();
+			setUSer(userInfo);
 			alert('Login Sucessful');
 			setRedirect(true);
 		} catch (error) {
