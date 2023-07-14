@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { UserContext } from '../UserContext';
+// import { UserContext } from '../UserContext';
 
 function LoginPage() {
 	const [email, setEmail] = useState('');
