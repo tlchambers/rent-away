@@ -6,7 +6,7 @@ function LoginPage() {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [redirect, setRedirect] = useState(false);
-	const { setUSer } = useContext(UserContext);
+	// const { setUSer } = useContext(UserContext);
 	async function fetchLogin(e) {
 		e.preventDefault();
 		try {
@@ -25,7 +25,7 @@ function LoginPage() {
 				{ withCredentials: true }
 			);
 			const data = await response.json();
-			setUSer(data);
+			// setUSer(data);
 			alert('Login Sucessful');
 			setRedirect(true);
 		} catch (error) {
